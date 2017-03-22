@@ -20,7 +20,7 @@ const {DATABASE_URL, PORT} = require('./config');
 app.use(express.static('public'));
 app.use(morgan('common'));
 app.use(bodyParser.json());
-//app.use('/posts', postsRouter);
+app.use('/posts', postsRouter);
 
 
 mongoose.Promise = global.Promise; 

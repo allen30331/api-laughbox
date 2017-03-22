@@ -12,6 +12,7 @@ postSchema.methods.apiRepr = function() {
 	return {
 		id: this._id,
 		title: this.title,
+		categories: this.categories,
 		content: this.content
 	}
 }
