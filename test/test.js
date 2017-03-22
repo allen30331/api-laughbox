@@ -5,6 +5,9 @@ chai.use(chaiHttp);
 const {app, runServer, closeServer} = require('../server');
 const mongoose = require('mongoose');
 
+
+
+
 describe('Tests root url', function() {
 	before(function() {
 		return runServer();
