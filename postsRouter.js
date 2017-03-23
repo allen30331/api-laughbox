@@ -22,6 +22,24 @@ router.get('/', function(req,res) {
 
 
 
+
+//Get one post by id
+router.get('/:id', (req,res) => {
+	console.log('you got one post');
+
+	Post
+		.findById(req.params.id)
+		.exec()
+		.then(posts => res.json(posts.apiRepr()))
+		.catch(err => {
+			console.error(err);
+			res.status(500).json({error: 'there was an error'});
+		});
+});
+
+
+
+
 //Create Post
 router.post('/', (req,res) => {
 console.log('this is a post entry');
