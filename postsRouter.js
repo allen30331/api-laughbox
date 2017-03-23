@@ -40,7 +40,7 @@ router.get('/:id', (req,res) => {
 
 
 
-//Create Post
+//Create post
 router.post('/', (req,res) => {
 console.log('this is a post entry');
 	Post
@@ -55,6 +55,24 @@ console.log('this is a post entry');
 			res.status(500).json({error: 'there was an error'});	
 		});
 });
+
+
+
+
+
+
+
+
+//Delete post
+router.delete('/:id', (req,res) => {
+	console.log('you delted a post');
+	
+	Post 
+		.findByIdAndRemove(req.params.id)
+		.exec()
+		.then(() => res.status(204).end())
+		.catch(err => res.status(500).json({message: 'there was an error'}));
+}); 
 
 
 module.exports = router;
