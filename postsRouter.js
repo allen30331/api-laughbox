@@ -6,7 +6,7 @@ const jsonParser = bodyParser.json();
 const {Post} = require('./models');
 
 //Gets all posts
-router.get('/', function(req,res) {
+router.get('/', (req,res) => {
 	console.log('hello');
 	Post
 		.find()
@@ -57,8 +57,25 @@ console.log('this is a post entry');
 });
 
 
+//Update Post
+router.put('/:id', (req,res) => {
+	console.log('you updated a post');
 
+	const toUpdate = {};
+	const updateableFields = ['title', 'categories', 'content'];
 
+	updateableFields.forEach(field => {
+		if (field in req.body) {
+			toUpdate[field] = req.body[field];
+		}
+
+		Post
+			.findByIdAndUpdate(req.params.id, {$set: toUpdate})
+			.exec()
+			.then(post => res.status(204).end())
+			.catch(err => res.status(500).json({message: 'Internal server error'}));
+	});
+});
 
 
 
