@@ -73,7 +73,9 @@ describe('laugh box API Resource', function() {
 			});
 	});
 
-
+		//Strategy
+		//1. Make a get request to db for all posts
+		//2. Check that status and format are correct
 		it('should return all existing posts', function() {
 			let res;
 			return chai.request(app)
@@ -90,7 +92,9 @@ describe('laugh box API Resource', function() {
 		});
 
 
-
+		//Strategy
+		//1. Make a get request to db for all posts
+		//2. Check that data is an object and has correct keys
 		it('should return posts with right fields', function() {
 			let resPost;
 			return chai.request(app)
@@ -116,6 +120,9 @@ describe('laugh box API Resource', function() {
 	//Tests Post endpoint
 	describe('POST endpoint', function() {
 
+		//Strategy
+		//1. Make a post request to db 
+		//2. Check that the data we sent equals the data we get back 
 		it('should create a new post', function() {
 			const newPost = createPost();
 			return chai.request(app)
@@ -131,6 +138,35 @@ describe('laugh box API Resource', function() {
 					res.body.content.should.equal(newPost.content);
 				});
 
+		});
+	});
+
+
+	describe('PUT endpoint', function() {
+
+		it('should update fields you send', function() {
+			const updateData = {
+				title: 'I changed somenthing',
+				categories: 'Test'
+			}
+
+			return Post 
+				.findOne()
+				.exec()
+				.then(function(post) {
+					updateData.id = post.id;
+
+					return chai.request(app)
+						.put(`/posts/${post.id}`)
+						.send(updateData);
+				})
+				.then(function(res) {
+					res.should.have.status(204);
+					return Post.findById(updateData.id).exec();
+				})
+				.then(function(post) {
+					post.title.should.equal(updateData.title);
+				});
 		});
 	});
 	
