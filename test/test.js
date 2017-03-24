@@ -50,9 +50,9 @@ describe('laugh box API Resource', function() {
 	})
 
 
-	afterEach(function() {
-		return tearDownDb();
-	});
+	// afterEach(function() {
+	// 	return tearDownDb();
+	// });
 
 
 	after(function() {
