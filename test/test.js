@@ -85,4 +85,17 @@ describe('laugh box API Resource', function() {
 		})
 	});
 
+
+
+	it('should return posts with right fields', function() {
+		let resPost;
+		return chai.request(app)
+			.get('/posts')
+			.then(function(res) {
+				res.body.forEach(function(post){
+					post.should.be.a('object');
+					post.should.include.keys('id', 'title', 'categories', 'content');
+				});
+			});
+	});
 });
