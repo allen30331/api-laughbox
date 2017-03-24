@@ -196,7 +196,15 @@ describe('laugh box API Resource', function() {
 				})
 				.then(function(res) {
 					res.should.have.status(204);
+					return Post.findById(post.id).exec()
 				})
+				.then(function(_post) {
+					// when a variable's value is null, chaining `should`
+			        // doesn't work. so `_post.should.be.null` would raise
+			        // an error. `should.be.null(_post)` is how we can
+			        // make assertions about a null value.
+					should.not.exist(_post);
+				});
 		});
 	});
 });
