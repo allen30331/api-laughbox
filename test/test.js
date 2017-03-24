@@ -96,6 +96,14 @@ describe('laugh box API Resource', function() {
 					post.should.be.a('object');
 					post.should.include.keys('id', 'title', 'categories', 'content');
 				});
+				resPost = res.body[0];
+				return Post.findById(resPost.id);
+			})
+			.then(function(post) {
+				resPost.id.should.equal(post.id);
+				resPost.title.should.equal(post.title);
+				resPost.categories.should.equal(post.categories);
+				resPost.content.should.equal(post.content);
 			});
 	});
 });
