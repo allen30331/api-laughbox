@@ -144,6 +144,11 @@ describe('laugh box API Resource', function() {
 
 	describe('PUT endpoint', function() {
 
+	//Strategy
+    //  1. Get an existing dream from db
+    //  2. Make a PUT request to update that dream
+    //  3. Prove dream returned by request contains data we sent
+    //  4. Prove dream in db is correctly updated
 		it('should update fields you send', function() {
 			const updateData = {
 				title: 'I changed somenthing',
@@ -166,6 +171,7 @@ describe('laugh box API Resource', function() {
 				})
 				.then(function(post) {
 					post.title.should.equal(updateData.title);
+					post.categories.should.equal(updateData.categories);
 				});
 		});
 	});
