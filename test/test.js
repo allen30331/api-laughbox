@@ -123,6 +123,9 @@ describe('laugh box API Resource', function() {
 					res.should.be.json;
 					res.should.be.a('object');
 					res.body.should.include.keys('id', 'title', 'categories', 'content');
+					res.body.title.should.equal(newPost.title);
+					res.body.categories.should.equal(newPost.categories);
+					res.body.content.should.equal(newPost.content);
 				});
 
 		});
