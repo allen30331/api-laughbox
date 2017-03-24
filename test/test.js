@@ -5,8 +5,8 @@ chai.use(chaiHttp);
 const {app, runServer, closeServer} = require('../server');
 const mongoose = require('mongoose');
 const {TEST_DATABASE_URL} = require('../config');
-
-
+const {Post} = require('../models');
+const faker = require('faker');
 
 
 function tearDownDb() {
@@ -18,11 +18,33 @@ function tearDownDb() {
   });
 }
 
+function seedPostData() {
+	console.info('seeding post data');
+	const seedData = [];
+	for (let i = 1; i <= 10; i++) {
+		seedData.push(createPost());
+	}
+	return Post.insertMany(seedData);
 
-describe('Tests root url', function() {
+}
+
+function createPost() {
+	return {
+		title: faker.name.title(),
+		categories: faker.lorem.word(),
+		content: faker.lorem.paragraph()
+	}
+}
+
+
+describe('laugh box API Resource', function() {
 	before(function() {
 		return runServer(TEST_DATABASE_URL);
 	});
+
+	beforeEach(function() {
+		return seedPostData();
+	})
 
 
 	afterEach(function() {
@@ -46,4 +68,21 @@ describe('Tests root url', function() {
 				res.should.be.html;
 			});
 	});
+
+
+	it('should return all existing posts', function() {
+		let res;
+		return chai.request(app)
+		.get('/posts')
+		.then(function(_res) {
+			res = _res;
+			res.should.have.status(200);
+			res.should.be.json;
+			return Post.count();
+		})
+		.then(function(count) {
+			res.body.should.have.length.of(count);
+		})
+	});
+
 });
