@@ -8,7 +8,7 @@ const {TEST_DATABASE_URL} = require('../config');
 const {Post} = require('../models');
 const faker = require('faker');
 
-
+//Drops database after each test
 function tearDownDb() {
   return new Promise((resolve, reject) => {
     console.warn('Deleting database');
@@ -18,6 +18,7 @@ function tearDownDb() {
   });
 }
 
+//Seeds database before each test
 function seedPostData() {
 	console.info('seeding post data');
 	const seedData = [];
@@ -28,6 +29,7 @@ function seedPostData() {
 
 }
 
+//Creates new post
 function createPost() {
 	return {
 		title: faker.name.title(),
@@ -37,6 +39,7 @@ function createPost() {
 }
 
 
+//Tests API
 describe('laugh box API Resource', function() {
 	before(function() {
 		return runServer(TEST_DATABASE_URL);
@@ -56,7 +59,7 @@ describe('laugh box API Resource', function() {
 		return closeServer();
 	});
 
-
+	//Tests GET enpoint
 	describe('GET endpoint', function() {
 
 		it('should give status 200 and be html', function() {
@@ -110,11 +113,11 @@ describe('laugh box API Resource', function() {
 	});
 
 
+	//Tests Post endpoint
 	describe('POST endpoint', function() {
 
 		it('should create a new post', function() {
 			const newPost = createPost();
-			
 			return chai.request(app)
 				.post('/posts')
 				.send(newPost)
