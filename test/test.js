@@ -176,4 +176,27 @@ describe('laugh box API Resource', function() {
 		});
 	});
 	
+
+	describe('DELETE endpoint', function() {
+
+	// Strategy
+    //  1. get a dream
+    //  2. make a DELETE request for that dream's id
+    //  3. assert that response has right status code
+    //  4. prove that dream with the id doesn't exist in db anymore
+		it('should delete a post by id', function() {
+			let post;
+
+			return Post 
+				.findOne()
+				.exec()
+				.then(function(_post) {
+					post = _post;
+					return chai.request(app).delete(`/posts/${post.id}`);
+				})
+				.then(function(res) {
+					res.should.have.status(204);
+				})
+		});
+	});
 });
