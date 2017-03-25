@@ -145,10 +145,10 @@ describe('laugh box API Resource', function() {
 	describe('PUT endpoint', function() {
 
 	//Strategy
-    //  1. Get an existing dream from db
-    //  2. Make a PUT request to update that dream
-    //  3. Prove dream returned by request contains data we sent
-    //  4. Prove dream in db is correctly updated
+    //  1. Get an existing post from db
+    //  2. Make a PUT request to update that post
+    //  3. Prove post returned by request contains data we sent
+    //  4. Prove post in db is correctly updated
 		it('should update fields you send', function() {
 			const updateData = {
 				title: 'I changed somenthing',
@@ -180,10 +180,10 @@ describe('laugh box API Resource', function() {
 	describe('DELETE endpoint', function() {
 
 	// Strategy
-    //  1. get a dream
-    //  2. make a DELETE request for that dream's id
+    //  1. get a post
+    //  2. make a DELETE request for that post's id
     //  3. assert that response has right status code
-    //  4. prove that dream with the id doesn't exist in db anymore
+    //  4. prove that post with the id doesn't exist in db anymore
 		it('should delete a post by id', function() {
 			let post;
 
