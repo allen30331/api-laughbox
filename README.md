@@ -57,6 +57,22 @@ delete /posts/:id</p> -->
 ## get
 
 	> get(/posts). Retrieves all posts. 
+	> get(/posts/:id). Retrieves post by id. 
+
+## post
+
+	> post(/posts). Creates new post. 
+
+
+## put
+
+	> put(/posts/:id). Updates post by id. 
+
+## delete
+
+	> delete(/posts/:id). Deletes post by id. 
+
+	
 
 
 # Technology
