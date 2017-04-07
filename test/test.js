@@ -4,8 +4,8 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const {app, runServer, closeServer} = require('../server');
 const mongoose = require('mongoose');
-const {TEST_DATABASE_URL} = require('../config');
-const {Post} = require('../models');
+const {TEST_DATABASE_URL} = require('../config/config');
+const {Post} = require('../models/models');
 const faker = require('faker');
 
 //Drops database after each test
