@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const path = require('path');
 const app = express();
-const postsRouter = require('./postsRouter');
-const {DATABASE_URL, PORT} = require('./config');
+const postsRouter = require('./routes/postsRouter');
+const {DATABASE_URL, PORT} = require('./config/config');
 
 app.use(express.static('public'));
 app.use(morgan('common'));

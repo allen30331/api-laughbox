@@ -3,7 +3,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-const {Post} = require('./models');
+const {Post} = require('../models/models');
 
 //Gets all posts
 router.get('/', (req,res) => {
